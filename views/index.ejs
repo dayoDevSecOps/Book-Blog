@@ -27,16 +27,23 @@
     <br>
 </div>
 <br>
-<div class="book-container" style="overflow: auto; margin-bottom: 20px;">
-    <img src="/images/book-cover.jpg" alt="Book Cover" style="float: left; margin-right: 20px; width: 150px;">
-    <div class="book-details">
-        <p class="book-title-author">Book Title - Author Name</p>
-        <p style="font-size: 0.9em;">Published: 2024</p>
-        <div class="notes">
-            <p style="font-style: italic;">Notes:</p>
-            <p>Your reading notes and thoughts about the book go here. This can include key takeaways, favorite quotes, or personal reflections.</p>
+<% books.forEach(book => { %>
+    <div class="book-container" style="overflow: auto; margin-bottom: 20px;">
+        <% if (book.cover_id) { %>
+            <img src="<%= book.cover_id %>" alt="Book Cover" style="float: left; margin-right: 20px; width: 150px;" 
+                 onerror="this.src='/default-cover.jpg'">
+        <% } %>
+        <div class="book-details">
+            <p class="book-title-author"><%= book.title %> - <%= book.author %></p>
+            <p style="font-size: 0.9em;">Published: <%= book.published_date %></p>
+            <% if (book.notes) { %>
+                <div class="notes">
+                    <p style="font-style: italic;">Notes:</p>
+                    <p><%= book.notes %></p>
+                </div>
+            <% } %>
         </div>
     </div>
-</div>
+<% }); %>
 </body>
 </html>
